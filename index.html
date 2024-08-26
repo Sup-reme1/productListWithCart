@@ -1,74 +1,335 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
 
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  
+  <link rel="stylesheet" href="style.css">
+
   <title>Frontend Mentor | Product list with cart</title>
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
 </head>
+
 <body>
 
-  Desserts
+  <div class="grid-container">
+    <div class="header">Desserts</div>
 
-  Waffle with Berries
-  Waffle
-  6.50
-  Add to Cart
+    <!-- Main Section -->
+    <div class="main-section">
+      <div class="product-section">
 
-  Vanilla Bean Crème Brûlée
-  Crème Brûlée
-  7.00
-  Add to Cart
+        <div class="product-container img1">
+          <div class="cart-flex">
+            <img src="assets/images/image-waffle-desktop.jpg" alt="cake">
+            <!-- Add to Cart Container -->
+            <div class="add-cart-container">
+              <div class="add-to-cart">
+                <img src="assets/images/icon-add-to-cart.svg" alt="">
+                <h2>Add to Cart</h2>
+              </div>
 
-  Macaron Mix of Five
-  Macaron
-  8.00
-  Add to Cart
+              <!-- Container to hold the no of goods -->
+              <div class="open-count">
+                <img src="assets/images/icon-decrement-quantity.svg" alt="subtract">
+                <span id="count">0</span>
+                <img src="assets/images/icon-increment-quantity.svg" alt="">
+              </div>
+            </div>
+          </div>
 
-  Classic Tiramisu
-  Tiramisu
-  5.50
-  Add to Cart
+          <p>Waffle</p>
+          <h1>Waffle with Berries</h1>
+          <h3 class="price">$6.50</h3>
+        </div>
 
-  Pistachio Baklava
-  Baklava
-  4.00
-  Add to Cart
+        <div class="product-container img2">
+          <div class="cart-flex">
+            <img src="assets/images/image-creme-brulee-desktop.jpg" alt="vanilla">
+            <!-- Add to Cart Container -->
+            <div class="add-cart-container">
+              <div class="add-to-cart">
+                <img src="assets/images/icon-add-to-cart.svg" alt="">
+                <h2>Add to Cart</h2>
+              </div>
 
-  Lemon Meringue Pie
-  Pie
-  5.00
-  Add to Cart
+              <!-- Container to hold the no of goods -->
+              <div class="open-count">
+                <img src="assets/images/icon-decrement-quantity.svg" alt="subtract">
+                <span id="count">0</span>
+                <img src="assets/images/icon-increment-quantity.svg" alt="">
+              </div>
+            </div>
+          </div>
+          <p>Crème Brûlée</p>
+          <h1>Vanilla Bean Crème Brûlée</h1>
+          <h3 class="price">$7.00</h3>
+        </div>
 
-  Red Velvet Cake
-  Cake
-  4.50
-  Add to Cart
+        <div class="product-container img3">
+          <div class="cart-flex">
 
-  Salted Caramel Brownie
-  Brownie
-  4.50
-  Add to Cart
+            <img src="assets/images/image-macaron-desktop.jpg" alt="vanilla">
+            <!-- Add to Cart Container -->
+            <div class="add-cart-container">
+              <div class="add-to-cart">
+                <img src="assets/images/icon-add-to-cart.svg" alt="">
+                <h2>Add to Cart</h2>
+              </div>
 
-  Vanilla Panna Cotta
-  Panna Cotta
-  6.50
-  Add to Cart
+              <!-- Container to hold the no of goods -->
+              <div class="open-count">
+                <img src="assets/images/icon-decrement-quantity.svg" alt="subtract">
+                <span id="count">0</span>
+                <img src="assets/images/icon-increment-quantity.svg" alt="">
+              </div>
+            </div>
+          </div>
+          <p>Macarone</p>
+          <h1>Macaron Mix of Five</h1>
+          <h3 class="price">$8.00</h3>
+        </div>
 
-  Your Cart (<!-- Quantity -->)
-  Your added items will appear here
+        <div class="product-container img4">
+          <div class="cart-flex">
 
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
+            <img src="assets/images/image-tiramisu-desktop.jpg" alt="vanilla">
+            <!-- Add to Cart Container -->
+            <div class="add-cart-container">
+              <div class="add-to-cart">
+                <img src="assets/images/icon-add-to-cart.svg" alt="">
+                <h2>Add to Cart</h2>
+              </div>
+
+              <!-- Container to hold the no of goods -->
+              <div class="open-count">
+                <img src="assets/images/icon-decrement-quantity.svg" alt="subtract">
+                <span id="count">0</span>
+                <img src="assets/images/icon-increment-quantity.svg" alt="">
+              </div>
+            </div>
+          </div>
+          <p>Tiramisu</p>
+          <h1>Classic Tiramisu</h1>
+          <h3 class="price">$5.50</h3>
+        </div>
+
+        <div class="product-container img5">
+          <div class="cart-flex">
+
+            <img src="assets/images/image-baklava-desktop.jpg" alt="vanilla">
+            <!-- Add to Cart Container -->
+            <div class="add-cart-container">
+              <div class="add-to-cart">
+                <img src="assets/images/icon-add-to-cart.svg" alt="">
+                <h2>Add to Cart</h2>
+              </div>
+
+              <!-- Container to hold the no of goods -->
+              <div class="open-count">
+                <img src="assets/images/icon-decrement-quantity.svg" alt="subtract">
+                <span id="count">0</span>
+                <img src="assets/images/icon-increment-quantity.svg" alt="">
+              </div>
+            </div>
+          </div>
+          <p>Baklava</p>
+          <h1>Pistachio Baklava</h1>
+          <h3 class="price">$4.00</h3>
+        </div>
+
+        <div class="product-container img6">
+          <div class="cart-flex">
+
+            <img src="assets/images/image-meringue-desktop.jpg" alt="vanilla">
+            <!-- Add to Cart Container -->
+            <div class="add-cart-container">
+              <div class="add-to-cart">
+                <img src="assets/images/icon-add-to-cart.svg" alt="">
+                <h2>Add to Cart</h2>
+              </div>
+
+              <!-- Container to hold the no of goods -->
+              <div class="open-count">
+                <img src="assets/images/icon-decrement-quantity.svg" alt="subtract">
+                <span id="count">0</span>
+                <img src="assets/images/icon-increment-quantity.svg" alt="">
+              </div>
+            </div>
+          </div>
+          <p>Pie</p>
+          <h1>Lemon Meringue Pie</h1>
+          <h3 class="price">$5.00</h3>
+        </div>
+
+        <div class="product-container img7">
+          <div class="cart-flex">
+
+            <img src="assets/images/image-cake-desktop.jpg" alt="vanilla">
+            <!-- Add to Cart Container -->
+            <div class="add-cart-container">
+              <div class="add-to-cart">
+                <img src="assets/images/icon-add-to-cart.svg" alt="">
+                <h2>Add to Cart</h2>
+              </div>
+
+              <!-- Container to hold the no of goods -->
+              <div class="open-count">
+                <img src="assets/images/icon-decrement-quantity.svg" alt="subtract">
+                <span id="count">0</span>
+                <img src="assets/images/icon-increment-quantity.svg" alt="">
+              </div>
+            </div>
+          </div>
+          <p>Cake</p>
+          <h1>Red Velvet Cake</h1>
+          <h3 class="price">$4.50</h3>
+        </div>
+
+        <div class="product-container img8">
+          <div class="cart-flex">
+
+            <img src="assets/images/image-brownie-desktop.jpg" alt="vanilla">
+            <!-- Add to Cart Container -->
+            <div class="add-cart-container">
+              <div class="add-to-cart">
+                <img src="assets/images/icon-add-to-cart.svg" alt="">
+                <h2>Add to Cart</h2>
+              </div>
+
+              <!-- Container to hold the no of goods -->
+              <div class="open-count">
+                <img src="assets/images/icon-decrement-quantity.svg" alt="subtract">
+                <span id="count">0</span>
+                <img src="assets/images/icon-increment-quantity.svg" alt="">
+              </div>
+            </div>
+          </div>
+          <p>Brownie</p>
+          <h1>Salted Caramel Brownie</h1>
+          <h3 class="price">$5.50</h3>
+        </div>
+
+        <div class="product-container img9">
+          <div class="cart-flex">
+
+            <img src="assets/images/image-panna-cotta-desktop.jpg" alt="vanilla">
+            <!-- Add to Cart Container -->
+            <div class="add-cart-container">
+              <div class="add-to-cart">
+                <img src="assets/images/icon-add-to-cart.svg" alt="">
+                <h2>Add to Cart</h2>
+              </div>
+
+              <!-- Container to hold the no of goods -->
+              <div class="open-count">
+                <img src="assets/images/icon-decrement-quantity.svg" alt="subtract">
+                <span id="count">0</span>
+                <img src="assets/images/icon-increment-quantity.svg" alt="">
+              </div>
+            </div>
+          </div>
+          <p>Panna Cotta</p>
+          <h1>Vanilla Panna Cotta</h1>
+          <h3 class="price">$6.50</h3>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Aside Section -->
+    <div class="aside">
+      <!-- Empty Data -->
+      <div class="empty-cart">
+        <h1>Your Cart (<span class="order-no">0</span>)</h1>
+        <img src="assets/images/illustration-empty-cart.svg" alt="empty">
+        <p>Your added items will appear here</p>
+      </div>
+
+      <!-- Ordered Data -->
+      <div class="order-cart">
+        <h1>Your Cart (<span class="order-no">0</span>)</h1>
+         <ul class="order-items">
+          <!-- Create List Items with Javascript  -->
+           <!-- Demo below -->
+          <li>
+            <div class="items">
+              <div>
+                <h1>Classic Tiramisu</h1>
+                <div class="items-qty-price">
+                  <p>1x</p>
+                  <h2 class="item-price">@$5.50</h2>
+                  <b class="item-total">$5.50</b>
+                </div>
+              </div>
+              <img src="assets/images/icon-remove-item.svg" alt="">     
+            </div>
+          </li>
+         </ul>
+
+         <div class="order-total">
+            <h2>Order Total</h2>
+            <h1 class="order-amount">$46.50</h1>
+         </div>
+
+         <!-- Delivery Section -->
+          <div class="delivery-text">
+            <img src="assets/images/icon-carbon-neutral.svg" alt="">
+            <p>This is a <b>carbon-neutral</b> delivery</p>
+          </div>
+          <button id="btn">Confirm Order</button>
+      </div>
+    </div>
+
+    <!-- Order Confirmed Section -->
+    <div class="order-confirm-section">
+      <div class="message">
+        <img src="assets/images/icon-order-confirmed.svg" alt="">
+        <h1 class="main-message">Order Confirmed</h1>
+        <p>We hope you enjoy your food!</p>
+      </div>
+      <ul class="order-items">
+        <!-- Create List Items with Javascript  -->
+         <!-- Demo below -->
+        <li>
+          <div class="items message-items">
+            <div class="tumbnails-flex">
+              <img class="tumbnails" src="assets/images/image-tiramisu-thumbnail.jpg" alt="">
+              <div>
+                <h1>Classic Tiramisu</h1>
+                <div class="items-qty-price">
+                  <p>1x</p>
+                  <h2 class="item-price">@$5.50</h2>
+                  <b class="item-total">$5.50</b>
+                </div>
+              </div>
+            </div>
+            <img src="assets/images/icon-remove-item.svg" alt="">
+          </div>
+        </li>
+        <!-- Total Part -->
+        <li class="order-total">
+          <h2>Order Total</h2>
+          <h1 class="order-amount">$46.50</h1>
+        </li>
+        </ul>
+
+       <!-- Button Part -->
+       <button id="btn">Start New Order</button>
+    </div>
+
+    <!-- Footer -->
+    <div class="attribution">
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
+      Coded by <a href="#">Sup-reme1</a>.
+    </div>
+
   </div>
+  </div>
+
 </body>
+
 </html>

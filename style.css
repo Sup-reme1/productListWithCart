@@ -285,6 +285,9 @@ body{
     align-items: center;
     justify-content: center;
     font-size: .5em;
+    background: var(--rose100);
+    border-radius: 1rem;
+    margin: 1rem 0;
 }
 
 .delivery-text img{
@@ -326,13 +329,13 @@ body{
     padding: 1.5rem;
     border-radius: 10px;
     box-shadow: var(--shadow);
-    width: 400px;
+    width: 50%;
 
     position: fixed;
     top: 30vh;
     justify-self: center;
 
-    display: none;
+    /* display: none; */
 }
 
 .message h1{
@@ -386,7 +389,68 @@ body{
     
 }
 
-/* Media Screen for Mobile */
+/* Media Screen for ipad */
 @media ( max-width: 745px ){
+    .grid-container{
+        grid-template-columns: 1fr 1fr 0.6fr;
+        grid-column-gap: 5px;
+        grid-row-gap: 5px;
+    }    
 
+    /* Product Section */
+    .product-section{
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        column-gap: 10px;
+        row-gap: 10px;
+    }
+}
+
+/* Media Screen for Ipad */
+@media ( max-width: 650px ){
+    .grid-container{
+        grid-template-columns: 1fr .5fr 0.8fr;
+        grid-column-gap: 10px;
+        grid-row-gap: 5px;
+    }    
+
+    /* Product Section */
+    .product-section{
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    column-gap: 10px;
+    row-gap: 10px;
+    }
+}
+
+
+/* Media Screen for Mobile */
+@media ( max-width: 400px ){
+    .grid-container{
+        grid-template-areas: 
+            'header'
+            'main'
+            'aside'
+            'footer';
+        grid-template-columns: 1fr;
+        
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+    }    
+
+    /* Product Section */
+    .product-section {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        column-gap: 10px;
+        row-gap: 10px;
+    }
+
+    .aside {
+        margin-top: 10px;
+    }
+
+    /* Order Confirm Section  */
+    .order-confirm-section {
+        width: 100%;
+        bottom: -5vh;
+    }
 }

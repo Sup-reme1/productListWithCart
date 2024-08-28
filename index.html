@@ -8,6 +8,7 @@
 
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
   <link rel="stylesheet" href="style.css">
+  <script src="main.js"></script>
 
   <title>Frontend Mentor | Product list with cart</title>
 
@@ -15,7 +16,7 @@
 
 <body>
 
-  <div class="grid-container">
+  <div class="grid-container" id="container">
     <div class="header">Desserts</div>
 
     <!-- Main Section -->
@@ -27,20 +28,20 @@
             <img src="assets/images/image-waffle-desktop.jpg" alt="cake">
             <!-- Add to Cart Container -->
             <div class="add-cart-container">
-              <div class="add-to-cart">
+              <div class="add-to-cart product-1" id="product-1">
                 <img src="assets/images/icon-add-to-cart.svg" alt="">
                 <h2>Add to Cart</h2>
               </div>
 
               <!-- Container to hold the no of goods -->
-              <div class="open-count">
-                <img src="assets/images/icon-decrement-quantity.svg" alt="subtract">
+              <div class="open-count" id="count-1">
+                <img src="assets/images/icon-decrement-quantity.svg" class="decrement" alt="subtract">
                 <span id="count">0</span>
-                <img src="assets/images/icon-increment-quantity.svg" alt="">
+                <img src="assets/images/icon-increment-quantity.svg" class="increment" alt="add">
               </div>
             </div>
           </div>
-
+          
           <p>Waffle</p>
           <h1>Waffle with Berries</h1>
           <h3 class="price">$6.50</h3>
@@ -51,16 +52,16 @@
             <img src="assets/images/image-creme-brulee-desktop.jpg" alt="vanilla">
             <!-- Add to Cart Container -->
             <div class="add-cart-container">
-              <div class="add-to-cart">
+              <div class="add-to-cart product-2" id="product-2">
                 <img src="assets/images/icon-add-to-cart.svg" alt="">
                 <h2>Add to Cart</h2>
               </div>
 
               <!-- Container to hold the no of goods -->
-              <div class="open-count">
-                <img src="assets/images/icon-decrement-quantity.svg" alt="subtract">
+              <div class="open-count" id="count-2">
+                <img src="assets/images/icon-decrement-quantity.svg" class="decrement" alt="subtract">
                 <span id="count">0</span>
-                <img src="assets/images/icon-increment-quantity.svg" alt="">
+                <img src="assets/images/icon-increment-quantity.svg" class="increment" alt="add">
               </div>
             </div>
           </div>
@@ -75,16 +76,16 @@
             <img src="assets/images/image-macaron-desktop.jpg" alt="vanilla">
             <!-- Add to Cart Container -->
             <div class="add-cart-container">
-              <div class="add-to-cart">
+              <div class="add-to-cart" id="product-3">
                 <img src="assets/images/icon-add-to-cart.svg" alt="">
                 <h2>Add to Cart</h2>
               </div>
 
               <!-- Container to hold the no of goods -->
-              <div class="open-count">
-                <img src="assets/images/icon-decrement-quantity.svg" alt="subtract">
+              <div class="open-count" id="count-3">
+                <img src="assets/images/icon-decrement-quantity.svg" class="decrement" alt="subtract">
                 <span id="count">0</span>
-                <img src="assets/images/icon-increment-quantity.svg" alt="">
+                <img src="assets/images/icon-increment-quantity.svg" class="increment" alt="add">
               </div>
             </div>
           </div>
@@ -99,16 +100,16 @@
             <img src="assets/images/image-tiramisu-desktop.jpg" alt="vanilla">
             <!-- Add to Cart Container -->
             <div class="add-cart-container">
-              <div class="add-to-cart">
+              <div class="add-to-cart" id="product-4">
                 <img src="assets/images/icon-add-to-cart.svg" alt="">
                 <h2>Add to Cart</h2>
               </div>
 
               <!-- Container to hold the no of goods -->
-              <div class="open-count">
-                <img src="assets/images/icon-decrement-quantity.svg" alt="subtract">
+              <div class="open-count" id="count-4">
+                <img src="assets/images/icon-decrement-quantity.svg" class="decrement" alt="subtract">
                 <span id="count">0</span>
-                <img src="assets/images/icon-increment-quantity.svg" alt="">
+                <img src="assets/images/icon-increment-quantity.svg" class="increment" alt="add">
               </div>
             </div>
           </div>
@@ -123,16 +124,16 @@
             <img src="assets/images/image-baklava-desktop.jpg" alt="vanilla">
             <!-- Add to Cart Container -->
             <div class="add-cart-container">
-              <div class="add-to-cart">
+              <div class="add-to-cart" id="product-5">
                 <img src="assets/images/icon-add-to-cart.svg" alt="">
                 <h2>Add to Cart</h2>
               </div>
 
               <!-- Container to hold the no of goods -->
-              <div class="open-count">
-                <img src="assets/images/icon-decrement-quantity.svg" alt="subtract">
+              <div class="open-count" id="count-5">
+                <img src="assets/images/icon-decrement-quantity.svg" class="decrement" alt="subtract">
                 <span id="count">0</span>
-                <img src="assets/images/icon-increment-quantity.svg" alt="">
+                <img src="assets/images/icon-increment-quantity.svg" class="increment" alt="add">
               </div>
             </div>
           </div>
@@ -147,16 +148,16 @@
             <img src="assets/images/image-meringue-desktop.jpg" alt="vanilla">
             <!-- Add to Cart Container -->
             <div class="add-cart-container">
-              <div class="add-to-cart">
+              <div class="add-to-cart" id="product-6">
                 <img src="assets/images/icon-add-to-cart.svg" alt="">
                 <h2>Add to Cart</h2>
               </div>
 
               <!-- Container to hold the no of goods -->
-              <div class="open-count">
-                <img src="assets/images/icon-decrement-quantity.svg" alt="subtract">
+              <div class="open-count" id="count-6">
+                <img src="assets/images/icon-decrement-quantity.svg" class="decrement" alt="subtract">
                 <span id="count">0</span>
-                <img src="assets/images/icon-increment-quantity.svg" alt="">
+                <img src="assets/images/icon-increment-quantity.svg" class="increment" alt="add">
               </div>
             </div>
           </div>
@@ -171,16 +172,16 @@
             <img src="assets/images/image-cake-desktop.jpg" alt="vanilla">
             <!-- Add to Cart Container -->
             <div class="add-cart-container">
-              <div class="add-to-cart">
+              <div class="add-to-cart" id="product-7">
                 <img src="assets/images/icon-add-to-cart.svg" alt="">
                 <h2>Add to Cart</h2>
               </div>
 
               <!-- Container to hold the no of goods -->
-              <div class="open-count">
-                <img src="assets/images/icon-decrement-quantity.svg" alt="subtract">
+              <div class="open-count" id="count-7">
+                <img src="assets/images/icon-decrement-quantity.svg" class="decrement" alt="subtract">
                 <span id="count">0</span>
-                <img src="assets/images/icon-increment-quantity.svg" alt="">
+                <img src="assets/images/icon-increment-quantity.svg" class="increment" alt="add">
               </div>
             </div>
           </div>
@@ -195,16 +196,16 @@
             <img src="assets/images/image-brownie-desktop.jpg" alt="vanilla">
             <!-- Add to Cart Container -->
             <div class="add-cart-container">
-              <div class="add-to-cart">
+              <div class="add-to-cart" id="product-8">
                 <img src="assets/images/icon-add-to-cart.svg" alt="">
                 <h2>Add to Cart</h2>
               </div>
 
               <!-- Container to hold the no of goods -->
-              <div class="open-count">
-                <img src="assets/images/icon-decrement-quantity.svg" alt="subtract">
+              <div class="open-count" id="count-8">
+                <img src="assets/images/icon-decrement-quantity.svg" class="decrement" alt="subtract">
                 <span id="count">0</span>
-                <img src="assets/images/icon-increment-quantity.svg" alt="">
+                <img src="assets/images/icon-increment-quantity.svg" class="increment" alt="add">
               </div>
             </div>
           </div>
@@ -219,16 +220,16 @@
             <img src="assets/images/image-panna-cotta-desktop.jpg" alt="vanilla">
             <!-- Add to Cart Container -->
             <div class="add-cart-container">
-              <div class="add-to-cart">
+              <div class="add-to-cart" id="product-9">
                 <img src="assets/images/icon-add-to-cart.svg" alt="">
                 <h2>Add to Cart</h2>
               </div>
 
               <!-- Container to hold the no of goods -->
-              <div class="open-count">
-                <img src="assets/images/icon-decrement-quantity.svg" alt="subtract">
+              <div class="open-count" id="count-9">
+                <img src="assets/images/icon-decrement-quantity.svg" class="decrement" alt="subtract">
                 <span id="count">0</span>
-                <img src="assets/images/icon-increment-quantity.svg" alt="">
+                <img src="assets/images/icon-increment-quantity.svg" class="increment" alt="add">
               </div>
             </div>
           </div>

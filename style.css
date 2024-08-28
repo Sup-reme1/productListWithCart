@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap'); */
 @font-face {
     font-family: Kylra;
     src: url(assets/fonts/static/RedHat-Bold.ttf);
@@ -146,7 +146,7 @@ body{
     justify-content: space-between;
     padding: 4px 8px;
     border-radius: 20px;
-    /* display: none; */
+    display: none;
 }
 
 .open-count img{
@@ -335,7 +335,7 @@ body{
     top: 30vh;
     justify-self: center;
 
-    /* display: none; */
+    display: none;
 }
 
 .message h1{

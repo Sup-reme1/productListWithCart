@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   console.log(product.name);
                   if (product.iscart === false) {
                     // Adjust the product properties when clicked
+                    // update object properties
                     product.iscart = true;
                     addCart(product, cart);
 
@@ -71,33 +72,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 }
             });
-        })
 
-        var incrementIcon = document.querySelector(`.${tag} .increment`);
-        // console.log(incrementIcon);
-
-        incrementIcon.addEventListener('click', e => {
-            products.forEach(product => {
-                // console.log(product.tag);
-                if(product.tag === tag){
-                    // Increment Cart
-                    addCart(product, cart);
-                }
+            var incrementIcon = document.querySelector(`.${tag} .increment`);
+            // console.log(incrementIcon);
+            incrementIcon.addEventListener('click', e => {
+                products.forEach(product => {
+                    // console.log(product.tag);
+                    if(product.tag === tag){
+                        // Increment Cart
+                        addCart(product, cart);
+                    }
+                })
             })
-        })
-
-        var decrementIcon = document.querySelector(`.${tag} .decrement`);
-        console.log(decrementIcon);
-
-        decrementIcon.addEventListener('click', e => {
-            products.forEach(product => {
-                // console.log(product.tag);
-                if(product.tag === tag){
-                    // Decrement Cart
-                    removeCart(product, cart);
-                }
+    
+            var decrementIcon = document.querySelector(`.${tag} .decrement`);
+            // console.log(decrementIcon);
+            decrementIcon.addEventListener('click', e => {
+                products.forEach(product => {
+                    // console.log(product.tag);
+                    if(product.tag === tag){
+                        // Decrement Cart
+                        removeCart(product, cart);
+                    }
+                })
             })
+
+            updateCountContainer()
+            // setInterval(updateCountContainer, 1000);
+            
+            
         })
+
 
 
 
@@ -105,13 +110,99 @@ document.addEventListener('DOMContentLoaded', () => {
 
     })
 
+    function updateCountContainer(){
+        // Updating the selected product inside Order container
+        var count = 0;
+        const orderContainer = products.filter(product => product.iscart === true);
+        orderContainer.forEach(product => {
+            const asideEmptyContainer = document.querySelector('.empty-cart');
+            const nextSibling = asideEmptyContainer.nextElementSibling;
+            const orderSpan = nextSibling.querySelector('span');
+
+            count += product.count;
+            // console.log(nextSibling);
+
+            orderSpan.textContent = count;
+
+            const ulList = nextSibling.querySelector('ul');
+            var li = document.createElement('li');
+            li.setAttribute('class', 'items');
+
+            var div = document.createElement('div');
+
+            var h1Element = document.createElement('h1');
+
+            var divQty = document.createElement('div');
+            divQty.setAttribute('class', 'items-qty-price');
+            var pElement = document.createElement('p');
+            var h2Element = document.createElement('h2');
+            h2Element.setAttribute('class', 'item-price');
+            var bElement = document.createElement('b');
+            bElement.setAttribute('class', 'item-total');
+
+            var imgElement = document.createElement('img');
+            imgElement.setAttribute('src', 'assets/images/icon-remove-item.svg');
+
+            var h1Data = document.createTextNode(product.name);
+            var pData = document.createTextNode(`${product.count}x`);
+            var h2Data = document.createTextNode(`@$${product.price}`);
+            var bData = document.createTextNode(`$${total(product)}`);
+
+        //     <li class="items">
+        //     <div>
+        //       <h1>Classic Tiramisu</h1>
+        //       <div class="items-qty-price">
+        //         <p>1x</p>
+        //         <h2 class="item-price">@$5.50</h2>
+        //         <b class="item-total">$5.50</b>
+        //       </div>
+        //     </div>
+        //     <img src="assets/images/icon-remove-item.svg" alt="">
+        // </li>
+
+            console.log(imgElement);
+            // Appending Textnode to elements
+            h1Element.append(h1Data);
+            pElement.append(pData);
+            h2Element.append(h2Data);
+            bElement.append(bData);
+
+            // Appending element to DIVQTY
+            divQty.append(pElement);
+            divQty.append(h2Element);
+            divQty.append(bElement);
+
+            // Appending product data to DIV container
+            div.append(h1Element);
+            div.append(divQty);
+
+            // Appending Elements to Li
+            li.append(div);
+            li.append(imgElement);
+            
+            // Appending the Li to ul list
+            ulList.append(li);
+            // console.log(ulList);
+
+            asideEmptyContainer.style.display = 'none';
+            // if (product.iscart) console.log(product.name);
+        })
+    }
+
+
+    function total (product){
+        return product.price * product.count;
+    }
+
     function addCart (product, cart) {
         // increment count
+        // update object properties
         product.count += 1;
         updateCart(product, cart);   
     }
 
     function removeCart (product, cart){
+        // update object properties
         product.count -= 1;
         updateCart(product, cart);
     }

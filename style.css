@@ -223,6 +223,7 @@ body{
     padding: 1rem;
 
     /* display: none; */
+    /* display: block; */
 }
 
 .order-cart > h1{

@@ -43,32 +43,16 @@ document.addEventListener('DOMContentLoaded', () => {
             products.forEach(product => {
                 // console.log(tag);
                 if (product.tag === tag) {
-                  console.log(product.name);
                   if (product.iscart === false) {
-                    // Adjust the product properties when clicked
-                    // update object properties
-                    product.iscart = true;
+                    // Adjust the product properties when clicked and update object properties
+                    product.iscart = true;                    
                     addCart(product, cart);
 
-                    // product.count += 1;
+                    // Update Aside container
+                    updateCountContainer()                
 
-                    // // Display the count with nextElementSibling and hide the cart container
-                    // cart.style.display = 'none';
-                    // const nextSibling = cart.nextElementSibling;
-                    // // console.log(nextSibling);
-                    // number = nextSibling.querySelector('span');
-                    // // console.log(number);
-                    // number.textContent = product.count;
-                    // nextSibling.style.display = 'flex';
-
-                    // Hide the Cart container and show the count countainer using count-container label
-                    // cart.style.display = 'none';
-                    // const displayCountContainer = document.getElementById(product.countContainerId);
-                    // number = displayCountContainer.querySelector('span');
-                    // number.textContent = product.count;
-                    // displayCountContainer.style.display = 'flex'                    
-
-                  } else product.iscart = false;
+                  } 
+                //   else product.iscart = false;
 
                 }
             });
@@ -81,6 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     if(product.tag === tag){
                         // Increment Cart
                         addCart(product, cart);
+                        // Update Aside container
+                        updateCountContainer();
                     }
                 })
             })
@@ -93,120 +79,173 @@ document.addEventListener('DOMContentLoaded', () => {
                     if(product.tag === tag){
                         // Decrement Cart
                         removeCart(product, cart);
-                    }
+                        // Update Aside container
+                        updateCountContainer();
+
+                    };                    
                 })
             })
 
-            updateCountContainer()
-            // setInterval(updateCountContainer, 1000);
-            
-            
+            // updateCountContainer()
+            // // setInterval(updateCountContainer, 1000);
         })
-
-
-
-
-
-
     })
 
+    // Function to update aside cart container
     function updateCountContainer(){
         // Updating the selected product inside Order container
         var count = 0;
         const orderContainer = products.filter(product => product.iscart === true);
+
         orderContainer.forEach(product => {
             const asideEmptyContainer = document.querySelector('.empty-cart');
             const nextSibling = asideEmptyContainer.nextElementSibling;
+            const asideOrderContainer = document.querySelector('.order-cart');
             const orderSpan = nextSibling.querySelector('span');
 
+            // Display and hide the aside container
+            asideEmptyContainer.style.display = 'none';
+            asideOrderContainer.style.display = 'block';
+
+            // Display the total count of items
             count += product.count;
             // console.log(nextSibling);
-
             orderSpan.textContent = count;
 
+            // Selecting List container
             const ulList = nextSibling.querySelector('ul');
-            var li = document.createElement('li');
-            li.setAttribute('class', 'items');
 
-            var div = document.createElement('div');
+            // Check for Existing list
+            var existingLi = ulList.querySelector(`li[data-id = '${product.tag}']`)
+            if (existingLi) {
+              // Select the Elements in existingLi
+              const pElement = existingLi.querySelector("p");
+              const h2Element = existingLi.querySelector("h2");
+              const bElement = existingLi.querySelector("b");
 
-            var h1Element = document.createElement('h1');
+              // If all the product is removed, Exit the container
+              if (product.count === 0) {
+                existingLi.remove();
+                product.iscart = false;
+                checkContainer(asideEmptyContainer, asideOrderContainer);
+              }
 
-            var divQty = document.createElement('div');
-            divQty.setAttribute('class', 'items-qty-price');
-            var pElement = document.createElement('p');
-            var h2Element = document.createElement('h2');
-            h2Element.setAttribute('class', 'item-price');
-            var bElement = document.createElement('b');
-            bElement.setAttribute('class', 'item-total');
+              // Write inside the Elements in existingLi
+              pElement.textContent = product.count;
+              h2Element.textContent = `@$${product.price}`;
+              bElement.textContent = `$${total(product)}`;
+            } else {
 
-            var imgElement = document.createElement('img');
-            imgElement.setAttribute('src', 'assets/images/icon-remove-item.svg');
+              // Creating a li element for the selected product
+              var li = document.createElement("li");
+              li.setAttribute("class", "items");
+              li.setAttribute("data-id", product.tag);
 
-            var h1Data = document.createTextNode(product.name);
-            var pData = document.createTextNode(`${product.count}x`);
-            var h2Data = document.createTextNode(`@$${product.price}`);
-            var bData = document.createTextNode(`$${total(product)}`);
+              var div = document.createElement("div");
+              var h1Element = document.createElement("h1");
 
-        //     <li class="items">
-        //     <div>
-        //       <h1>Classic Tiramisu</h1>
-        //       <div class="items-qty-price">
-        //         <p>1x</p>
-        //         <h2 class="item-price">@$5.50</h2>
-        //         <b class="item-total">$5.50</b>
-        //       </div>
-        //     </div>
-        //     <img src="assets/images/icon-remove-item.svg" alt="">
-        // </li>
+              var divQty = document.createElement("div");
+              divQty.setAttribute("class", "items-qty-price");
+              var pElement = document.createElement("p");
+              var h2Element = document.createElement("h2");
+              h2Element.setAttribute("class", "item-price");
+              var bElement = document.createElement("b");
+              bElement.setAttribute("class", "item-total");
 
-            console.log(imgElement);
-            // Appending Textnode to elements
-            h1Element.append(h1Data);
-            pElement.append(pData);
-            h2Element.append(h2Data);
-            bElement.append(bData);
+              var imgElement = document.createElement("img");
+              imgElement.setAttribute(
+                "src",
+                "assets/images/icon-remove-item.svg"
+              );
 
-            // Appending element to DIVQTY
-            divQty.append(pElement);
-            divQty.append(h2Element);
-            divQty.append(bElement);
+              // Creating Data element for the list
+              var h1Data = document.createTextNode(product.name);
+              var pData = document.createTextNode(`${product.count}x`);
+              var h2Data = document.createTextNode(`@$${product.price}`);
+              var bData = document.createTextNode(`$${total(product)}`);
 
-            // Appending product data to DIV container
-            div.append(h1Element);
-            div.append(divQty);
+              // Appending Textnode to elements
+              h1Element.append(h1Data);
+              pElement.append(pData);
+              h2Element.append(h2Data);
+              bElement.append(bData);
 
-            // Appending Elements to Li
-            li.append(div);
-            li.append(imgElement);
-            
-            // Appending the Li to ul list
-            ulList.append(li);
-            // console.log(ulList);
+              // Appending element to DIVQTY
+              divQty.append(pElement);
+              divQty.append(h2Element);
+              divQty.append(bElement);
 
-            asideEmptyContainer.style.display = 'none';
-            // if (product.iscart) console.log(product.name);
+              // Appending product data to DIV container
+              div.append(h1Element);
+              div.append(divQty);
+
+              // Appending Elements to Li
+              li.append(div);
+              li.append(imgElement);
+
+              // Appending the Li to ul list
+              ulList.append(li);
+              // console.log(ulList);
+            }
+
+            // Total section
+            // get the class id of total section and write inside the total element
+            const orderTotal = document.querySelector('.order-total');
+            var h1Total = orderTotal.querySelector('h1');
+            h1Total.textContent = `$${sumTotal()}`;
+            orderTotal.append(h1Total);
+
         })
     }
 
+    // function to check if the aside section is removed entirely 
+    function checkContainer(asideEmptyContainer, asideOrderContainer){
+        const checkIstrue = products.filter(product => product.iscart === true); 
+        // Check if OrderContainer array become empty
+        console.log(checkIstrue);
+        if(checkIstrue.length === 0){
+            // Display and hide the aside container
+            asideEmptyContainer.style.display = 'grid';
+            asideOrderContainer.style.display = 'none';
+        }
+    };
 
+
+    // Function to sum overall total for the Aside section
+    function sumTotal(){
+        let sum = 0;
+        const totalSum = products.filter(product => product.iscart === true);
+        totalSum.forEach(product =>{
+            sum += total(product);
+        });
+        return sum;
+    };
+
+    // Function to sum each total of products in the Aside section
     function total (product){
         return product.price * product.count;
     }
 
+    // Function to increment products in Add-to-cart
     function addCart (product, cart) {
-        // increment count
-        // update object properties
+        // increment count and update object properties
         product.count += 1;
         updateCart(product, cart);   
     }
 
+    // Function to decrement products in Add-to-cart
     function removeCart (product, cart){
         // update object properties
-        product.count -= 1;
+        if (product.count === 0){
+            product.count = product.count
+        } else{
+            product.count -= 1;
+        }
+
         updateCart(product, cart);
     }
 
+    // Function to update Add-to-cart data
     function updateCart(product, cart){
         // Display the count with nextElementSibling and hide the cart container
         cart.style.display = 'none';
@@ -221,30 +260,5 @@ document.addEventListener('DOMContentLoaded', () => {
             nextSibling.style.display = 'none'; 
         }      
     }
-
-    // const gridBox = document.getElementById('container');
-    // // console.log(gridBox);
-    // gridBox.addEventListener('click', e => {
-    //     console.log(e);
-    // })
-
-    // products.forEach(product => {
-    //     console.log(product.tag)
-
-    //     productId = product.tag.toString();
-    //     console.log(typeof(productId));
-        
-    //     cart = document.getElementById(productId);
-    //     console.log(cart);
-    //     cart.addEventListener('click', () => {
-    //         return true
-    //     });
-    //     return false;
-
-    //     // document.getElementById(`${product.tag}`).addEventListener('click', ()=>{
-    //     //     console.log('this is the product:',product.tag);
-    //     // });
-
-    // })
 
 });

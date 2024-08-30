@@ -1,103 +1,103 @@
-To prevent the code from adding duplicate data every second when using `setInterval`, you can modify the function to update the existing elements rather than re-creating and appending them. One approach is to check if an item already exists in the DOM based on a unique identifier (e.g., `product.id`). If it exists, update its content; if it doesn't, create and append it.
+// To prevent the code from adding duplicate data every second when using `setInterval`, you can modify the function to update the existing elements rather than re-creating and appending them. One approach is to check if an item already exists in the DOM based on a unique identifier (e.g., `product.id`). If it exists, update its content; if it doesn't, create and append it.
 
-Here’s how you can modify the code:
+// Here’s how you can modify the code:
 
-```javascript
-function updateOrderContainer() {
-    var count = 0;
-    const orderContainer = products.filter(product => product.iscart === true);
+// ```javascript
+// function updateOrderContainer() {
+//     var count = 0;
+//     const orderContainer = products.filter(product => product.iscart === true);
 
-    const asideEmptyContainer = document.querySelector('.empty-cart');
-    const nextSibling = asideEmptyContainer.nextElementSibling;
-    const orderSpan = nextSibling.querySelector('span');
-    const ulList = nextSibling.querySelector('ul');
+//     const asideEmptyContainer = document.querySelector('.empty-cart');
+//     const nextSibling = asideEmptyContainer.nextElementSibling;
+//     const orderSpan = nextSibling.querySelector('span');
+//     const ulList = nextSibling.querySelector('ul');
 
-    orderContainer.forEach(product => {
-        count += product.count;
+//     orderContainer.forEach(product => {
+//         count += product.count;
 
-        // Update the order count
-        orderSpan.textContent = count;
+//         // Update the order count
+//         orderSpan.textContent = count;
 
-        // Check if the product is already in the list
-        let existingLi = ulList.querySelector(`li[data-id="${product.id}"]`);
+//         // Check if the product is already in the list
+//         let existingLi = ulList.querySelector(`li[data-id="${product.id}"]`);
 
-        if (existingLi) {
-            // Update existing item
-            const pElement = existingLi.querySelector('.items-qty-price p');
-            const h2Element = existingLi.querySelector('.item-price');
-            const bElement = existingLi.querySelector('.item-total');
+//         if (existingLi) {
+//             // Update existing item
+//             const pElement = existingLi.querySelector('.items-qty-price p');
+//             const h2Element = existingLi.querySelector('.item-price');
+//             const bElement = existingLi.querySelector('.item-total');
 
-            pElement.textContent = product.count;
-            h2Element.textContent = product.price;
-            bElement.textContent = total(product);
-        } else {
-            // Create new list item if it doesn't exist
-            var li = document.createElement('li');
-            li.setAttribute('class', 'items');
-            li.setAttribute('data-id', product.id);  // Set data-id to identify this item
+//             pElement.textContent = product.count;
+//             h2Element.textContent = product.price;
+//             bElement.textContent = total(product);
+//         } else {
+//             // Create new list item if it doesn't exist
+//             var li = document.createElement('li');
+//             li.setAttribute('class', 'items');
+//             li.setAttribute('data-id', product.id);  // Set data-id to identify this item
 
-            var div = document.createElement('div');
+//             var div = document.createElement('div');
 
-            var h1Element = document.createElement('h1');
-            var h1Data = document.createTextNode(product.name);
-            h1Element.append(h1Data);
+//             var h1Element = document.createElement('h1');
+//             var h1Data = document.createTextNode(product.name);
+//             h1Element.append(h1Data);
 
-            var divQty = document.createElement('div');
-            divQty.setAttribute('class', 'items-qty-price');
+//             var divQty = document.createElement('div');
+//             divQty.setAttribute('class', 'items-qty-price');
 
-            var pElement = document.createElement('p');
-            var pData = document.createTextNode(product.count);
-            pElement.append(pData);
+//             var pElement = document.createElement('p');
+//             var pData = document.createTextNode(product.count);
+//             pElement.append(pData);
 
-            var h2Element = document.createElement('h2');
-            h2Element.setAttribute('class', 'item-price');
-            var h2Data = document.createTextNode(product.price);
-            h2Element.append(h2Data);
+//             var h2Element = document.createElement('h2');
+//             h2Element.setAttribute('class', 'item-price');
+//             var h2Data = document.createTextNode(product.price);
+//             h2Element.append(h2Data);
 
-            var bElement = document.createElement('b');
-            bElement.setAttribute('class', 'item-total');
-            var bData = document.createTextNode(total(product));
-            bElement.append(bData);
+//             var bElement = document.createElement('b');
+//             bElement.setAttribute('class', 'item-total');
+//             var bData = document.createTextNode(total(product));
+//             bElement.append(bData);
 
-            var imgElement = document.createElement('img');
-            imgElement.setAttribute('src', 'assets/images/icon-remove-item.svg');
+//             var imgElement = document.createElement('img');
+//             imgElement.setAttribute('src', 'assets/images/icon-remove-item.svg');
 
-            // Append elements to divQty
-            divQty.append(pElement);
-            divQty.append(h2Element);
-            divQty.append(bElement);
+//             // Append elements to divQty
+//             divQty.append(pElement);
+//             divQty.append(h2Element);
+//             divQty.append(bElement);
 
-            // Append product data to div container
-            div.append(h1Element);
-            div.append(divQty);
+//             // Append product data to div container
+//             div.append(h1Element);
+//             div.append(divQty);
 
-            // Append elements to li
-            li.append(div);
-            li.append(imgElement);
+//             // Append elements to li
+//             li.append(div);
+//             li.append(imgElement);
 
-            // Append the li to ul list
-            ulList.append(li);
-        }
-    });
+//             // Append the li to ul list
+//             ulList.append(li);
+//         }
+//     });
 
-    // Show or hide the empty container
-    asideEmptyContainer.style.display = orderContainer.length > 0 ? 'none' : 'block';
-}
+//     // Show or hide the empty container
+//     asideEmptyContainer.style.display = orderContainer.length > 0 ? 'none' : 'block';
+// }
 
-// Set an interval to refresh the data every second (or adjust the timing as needed)
-setInterval(updateOrderContainer, 1000);
-```
+// // Set an interval to refresh the data every second (or adjust the timing as needed)
+// setInterval(updateOrderContainer, 1000);
+// ```
 
-### Explanation:
-1. **Identify Existing Items**:
-   - Each `<li>` element is given a `data-id` attribute that corresponds to the `product.id`. This makes it easy to find and update specific list items if they already exist.
+// ### Explanation:
+// 1. **Identify Existing Items**:
+//    - Each `<li>` element is given a `data-id` attribute that corresponds to the `product.id`. This makes it easy to find and update specific list items if they already exist.
 
-2. **Update vs. Create**:
-   - The function checks if a `<li>` with the corresponding `data-id` already exists in the list (`ulList`).
-   - If it exists, the inner text of the existing elements (`<p>`, `<h2>`, `<b>`) is updated.
-   - If it doesn’t exist, a new `<li>` is created and appended to the list.
+// 2. **Update vs. Create**:
+//    - The function checks if a `<li>` with the corresponding `data-id` already exists in the list (`ulList`).
+//    - If it exists, the inner text of the existing elements (`<p>`, `<h2>`, `<b>`) is updated.
+//    - If it doesn’t exist, a new `<li>` is created and appended to the list.
 
-3. **No Duplicate Additions**:
-   - This ensures that the list is only updated with the new data, and no duplicate items are added, avoiding the issue of repeated appending every second.
+// 3. **No Duplicate Additions**:
+//    - This ensures that the list is only updated with the new data, and no duplicate items are added, avoiding the issue of repeated appending every second.
 
-This way, the content of your page remains consistent, and only changes when the underlying `products` data changes.
+// This way, the content of your page remains consistent, and only changes when the underlying `products` data changes.

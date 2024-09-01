@@ -49,59 +49,76 @@ document.addEventListener('DOMContentLoaded', () => {
                     addCart(product, cart);
 
                     // Update Aside container
-                    updateCountContainer()                
+                    updateCountContainer('order-cart')                
 
                   } 
                 //   else product.iscart = false;
-
                 }
             });
 
-            var incrementIcon = document.querySelector(`.${tag} .increment`);
-            // console.log(incrementIcon);
-            incrementIcon.addEventListener('click', e => {
-                products.forEach(product => {
-                    // console.log(product.tag);
-                    if(product.tag === tag){
-                        // Increment Cart
-                        addCart(product, cart);
-                        // Update Aside container
-                        updateCountContainer();
-                    }
-                })
-            })
-    
-            var decrementIcon = document.querySelector(`.${tag} .decrement`);
-            // console.log(decrementIcon);
-            decrementIcon.addEventListener('click', e => {
-                products.forEach(product => {
-                    // console.log(product.tag);
-                    if(product.tag === tag){
-                        // Decrement Cart
-                        removeCart(product, cart);
-                        // Update Aside container
-                        updateCountContainer();
-
-                    };                    
-                })
-            })
-
-            // updateCountContainer()
             // // setInterval(updateCountContainer, 1000);
         })
+
+        var incrementIcon = document.querySelector(`.${tag} .increment`);
+        // console.log(incrementIcon);
+        incrementIcon.addEventListener('click', e => {
+            products.forEach(product => {
+                // console.log(product.tag);
+                if(product.tag === tag){
+                    // Increment Cart
+                    addCart(product, cart);
+                    // Update Aside container
+                    updateCountContainer('order-cart');
+                }
+            })
+        })
+
+        var decrementIcon = document.querySelector(`.${tag} .decrement`);
+        decrementIcon.addEventListener('click', e => {
+            products.forEach(product => {
+                // console.log(product.tag);
+                if(product.tag === tag){
+                    // Decrement Cart
+                    removeCart(product, cart);
+                    // Update Aside container
+                    updateCountContainer('order-cart');
+
+                };                    
+            })
+        })
+
+        confirmOrder = document.querySelector('#btn');
+        confirmOrder.addEventListener('click', ()=> {
+          confirmOrderSection = document.querySelector('.order-confirm-section');
+          fillConfirmOrder();
+          updateCountContainer('order-confirm-section');
+          confirmOrderSection.style.display = 'block';
+        })
+
     })
 
+
+
+    function fillConfirmOrder(){
+        const total = document.querySelectorAll('.order-amount')[1];
+        console.log(total);
+        total.textContent = `$${sumTotal()}`;
+
+
+    }
+
     // Function to update aside cart container
-    function updateCountContainer(){
+    function updateCountContainer(containerId){
         // Updating the selected product inside Order container
         var count = 0;
         const orderContainer = products.filter(product => product.iscart === true);
 
         orderContainer.forEach(product => {
             const asideEmptyContainer = document.querySelector('.empty-cart');
-            const nextSibling = asideEmptyContainer.nextElementSibling;
-            const asideOrderContainer = document.querySelector('.order-cart');
-            const orderSpan = nextSibling.querySelector('span');
+            // const nextSibling = asideEmptyContainer.nextElementSibling;
+            // const asideOrderContainer = document.querySelector('.order-cart');
+            const asideOrderContainer = document.querySelector(`.${containerId}`);
+            const orderSpan = asideOrderContainer.querySelector('span');
 
             // Display and hide the aside container
             asideEmptyContainer.style.display = 'none';
@@ -110,13 +127,13 @@ document.addEventListener('DOMContentLoaded', () => {
             // Display the total count of items
             count += product.count;
             // console.log(nextSibling);
-            orderSpan.textContent = count;
+            if(containerId === 'order-cart') orderSpan.textContent = count;
 
             // Selecting List container
-            const ulList = nextSibling.querySelector('ul');
+            const ulList = asideOrderContainer.querySelector('ul');
 
             // Check for Existing list
-            var existingLi = ulList.querySelector(`li[data-id = '${product.tag}']`)
+            var existingLi = ulList.querySelector(`li[data-id = '${product.tag}']`);
             if (existingLi) {
               // Select the Elements in existingLi
               const pElement = existingLi.querySelector("p");
@@ -131,17 +148,28 @@ document.addEventListener('DOMContentLoaded', () => {
               }
 
               // Write inside the Elements in existingLi
-              pElement.textContent = product.count;
+              pElement.textContent = `${product.count}x`;
               h2Element.textContent = `@$${product.price}`;
               bElement.textContent = `$${total(product)}`;
             } else {
 
               // Creating a li element for the selected product
               var li = document.createElement("li");
-              li.setAttribute("class", "items");
-              li.setAttribute("data-id", product.tag);
-
               var div = document.createElement("div");
+            //   Conditional statement to check which container to populate
+              if (containerId === 'order-cart'){
+                  li.setAttribute("class", "items");
+            } else{
+                li.setAttribute("class", "items message-items");
+                // div.setAttribute('class', 'tumbnails-flex');
+                // tumbnailImg = document.createElement('img');
+                // tumbnailImg.setAttribute('src', 'assets/images/image-tiramisu-thumbnail.jpg')
+                // tumbnailImg.setAttribute('class', 'tumbnails');
+                // div.append(tumbnailImg);
+            }
+
+              li.setAttribute("data-id", product.tag);
+              
               var h1Element = document.createElement("h1");
 
               var divQty = document.createElement("div");
@@ -154,8 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
               var imgElement = document.createElement("img");
               imgElement.setAttribute(
-                "src",
-                "assets/images/icon-remove-item.svg"
+                "src", "assets/images/icon-remove-item.svg"
               );
 
               // Creating Data element for the list
@@ -185,7 +212,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
               // Appending the Li to ul list
               ulList.append(li);
-              // console.log(ulList);
+
+            //   Event listener for he cancle img created in the list
+              var cart = document.querySelector(`.${product.tag} .add-to-cart`);
+              li.querySelector('img').addEventListener('click', ()=>{
+                product.iscart = false;
+                product.count = 0;
+                li.remove();
+                updateCart(product, cart);
+                checkContainer(asideEmptyContainer, asideOrderContainer);
+              })
+
+
+              
+              
             }
 
             // Total section
@@ -196,6 +236,23 @@ document.addEventListener('DOMContentLoaded', () => {
             orderTotal.append(h1Total);
 
         })
+    }
+
+    function checkCancleBtn(tag){
+        // // const orderContainer = document.querySelector('.order-cart');
+        // var orderList = document.querySelector(`li[data-id = '${tag}']`);
+        // var cancleBtn = orderList.querySelector(img);
+        // console.log(cancleBtn);
+        // cancleBtn.addEventListener('click', ()=>{
+        //     orderList.remove();
+        // })
+        // console.log(orderList);
+        // const cancleBtn = orderList.querySelector('img');
+        // cancleBtn.addEventListener('click', ()=>{
+        //   console.log('here');
+        //   console.log(product.name);
+        //   existingLi.remove();
+        // })
     }
 
     // function to check if the aside section is removed entirely 
